@@ -1,0 +1,22 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Gradle
+.gradle/
+build/
+out/
+
+# IntelliJ Platform
+.intellijPlatform/
+lazarus-plugin/.intellijPlatform/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
