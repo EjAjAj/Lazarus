@@ -10,6 +10,18 @@ class DependencyGraph {
         nodes[node.id] = node
     }
 
+    fun removeNode(id: NodeId) {
+        val node = nodes[id] ?: return
+        // Remove all edges associated with this node
+        node.incoming.forEach { edge ->
+            removeEdge(edge)
+        }
+        node.outgoing.forEach { edge ->
+            removeEdge(edge)
+        }
+        nodes.remove(id)
+    }
+
 
     fun addEdge(edge: GraphEdge) {
         val fromNode = nodes[edge.from]
@@ -22,9 +34,15 @@ class DependencyGraph {
         toNode.incoming.add(edge)
     }
 
+    fun removeEdge(edge: GraphEdge) {
+        val fromNode = nodes[edge.from] ?: return
+        val toNode = nodes[edge.to] ?: return
+        fromNode.outgoing.remove(edge)
+        toNode.incoming.remove(edge)
+    }
+
 
     fun getNode(id: NodeId): GraphNode? = nodes[id]
-
 
     fun allNodes(): Collection<GraphNode> = nodes.values
 
