@@ -33,8 +33,11 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.slf4j:slf4j-api:2.0.12")
     implementation("ch.qos.logback:logback-classic:1.5.6")
+    implementation("org.eclipse.jgit:org.eclipse.jgit:6.8.0.202311291450-r")
+    implementation("org.slf4j:slf4j-simple:2.0.9")
+    implementation("org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.8.0.202311291450-r")
+    implementation("com.jcraft:jsch:0.1.55")
 }
-
 intellijPlatform {
     pluginConfiguration {
         ideaVersion {
