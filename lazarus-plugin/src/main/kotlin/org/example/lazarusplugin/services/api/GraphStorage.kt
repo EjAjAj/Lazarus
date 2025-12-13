@@ -21,11 +21,16 @@ interface GraphStorage {
      * Save the current graph to disk
      * Returns a list of messages/logs about the save operation
      */
-    fun saveToDisk(): List<String>
+    fun saveToDisk()
 
     /**
      * Load graph from disk
      * Returns true if graph was loaded, false if no saved graph exists
      */
     fun load(): Boolean
+
+    /**
+     * Check if graph is ready to be used
+     */
+    fun isGraphReady(): Boolean
 }

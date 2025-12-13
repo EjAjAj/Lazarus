@@ -10,7 +10,7 @@ interface AgentService {
     /**
      * Get summary of changes between old file and new file
      */
-    suspend fun getChangesSummary(file: VirtualFile, fileFacts: FileFacts, newFile: VirtualFile): String
+    suspend fun getChangesSummary(file: VirtualFile, filesFacts: Array<String>, newFile: VirtualFile): String
 
     /**
      * Check if agent is available

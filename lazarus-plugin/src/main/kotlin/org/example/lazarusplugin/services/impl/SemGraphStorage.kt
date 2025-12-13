@@ -14,20 +14,26 @@ class SemGraphStorage(
     private val project: Project
 ) : GraphStorage {
 
-    private lateinit var _graph: IndexedCodeGraph
+    private var _graph: IndexedCodeGraph? = null
+    private var _graphReady: Boolean = false
 
     // This will be injected from plugin.xml via constructor parameter
     var storagePath: String = ".lazarus/semantic-graph.json"
 
     private val storageFile: File
         get() = File(project.basePath, storagePath)
-    
+
     override fun getGraph(): IndexedCodeGraph {
-        return _graph
+        return _graph ?: IndexedCodeGraph().also { _graph = it }
     }
-    
+
     override fun setGraph(graph: IndexedCodeGraph) {
         this._graph = graph
+        this._graphReady = true
+    }
+
+    override fun isGraphReady(): Boolean {
+        return _graphReady
     }
     
     override fun saveToDisk() {
@@ -40,8 +46,9 @@ class SemGraphStorage(
             println("No saved graph found at ${storageFile.absolutePath}")
             return false
         }
-        
+
         println("TODO: Load graph from ${storageFile.absolutePath}")
-        return false
+        _graphReady = true
+        return true
     }
 }

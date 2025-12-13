@@ -12,7 +12,7 @@ import org.example.lazarusplugin.services.api.AgentService
 @Service(Service.Level.PROJECT)
 class LLMAgentService(private val project: Project) : AgentService {
 
-    override suspend fun getChangesSummary(file: VirtualFile, fileFacts: FileFacts, newFile: VirtualFile): String {
+    override suspend fun getChangesSummary(file: VirtualFile, filesFacts: Array<String>, newFile: VirtualFile): String {
         // Dummy implementation
         return "Changes summary (dummy)"
     }
