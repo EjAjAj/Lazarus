@@ -3,7 +3,7 @@ package org.example.lazarusplugin.services.impl
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project
 import org.example.lazarusplugin.models.IndexedCodeGraph
-import org.example.lazarusplugin.services.api.GraphStorage
+import org.example.lazarusplugin.services.api.IGraphStorage
 import java.io.File
 
 /**
@@ -12,7 +12,7 @@ import java.io.File
 @Service(Service.Level.PROJECT)
 class SemGraphStorage(
     private val project: Project
-) : GraphStorage {
+) : IGraphStorage {
 
     private var _graph: IndexedCodeGraph? = null
     private var _graphReady: Boolean = false

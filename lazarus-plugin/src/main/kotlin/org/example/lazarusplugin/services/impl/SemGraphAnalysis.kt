@@ -4,9 +4,9 @@ import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.example.lazarusplugin.services.api.AgentService
-import org.example.lazarusplugin.services.api.GraphAnalysis
-import org.example.lazarusplugin.services.api.GraphReader
+import org.example.lazarusplugin.services.api.IAgentService
+import org.example.lazarusplugin.services.api.IGraphAnalysis
+import org.example.lazarusplugin.services.api.IGraphReader
 
 /**
  * Coordinator service that orchestrates graph reading and LLM analysis
@@ -15,9 +15,9 @@ import org.example.lazarusplugin.services.api.GraphReader
 @Service(Service.Level.PROJECT)
 class SemGraphAnalysis(
     private val project: Project,
-    private val graphReader: GraphReader,
-    private val agentService: AgentService
-) : GraphAnalysis {
+    private val graphReader: IGraphReader,
+    private val agentService: IAgentService
+) : IGraphAnalysis {
 
     override suspend fun analyzeFile(filePath: String): String = withContext(Dispatchers.IO) {
         // Dummy implementation

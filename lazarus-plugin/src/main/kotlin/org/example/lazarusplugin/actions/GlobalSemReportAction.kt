@@ -4,7 +4,7 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.components.service
-import org.example.lazarusplugin.services.api.GraphStorage
+import org.example.lazarusplugin.services.api.IGraphStorage
 import org.example.lazarusplugin.ui.MarkdownReportDialog
 
 class GlobalSemReportAction : AnAction("Generate Global Semantic Report") {
@@ -66,7 +66,7 @@ class GlobalSemReportAction : AnAction("Generate Global Semantic Report") {
     override fun update(e: AnActionEvent) {
         val project = e.project
         // Action is always visible but only enabled when graph is ready
-        val graphReady = project?.service<GraphStorage>()?.isGraphReady() ?: false
+        val graphReady = project?.service<IGraphStorage>()?.isGraphReady() ?: false
         e.presentation.isVisible = project != null
         e.presentation.isEnabled = graphReady
     }

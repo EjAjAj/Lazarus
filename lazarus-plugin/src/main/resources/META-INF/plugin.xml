@@ -31,15 +31,15 @@
         <postStartupActivity implementation="org.example.lazarusplugin.Main"/>
 
         <!-- Service registrations -->
-        <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphStorage"
+        <projectService serviceInterface="org.example.lazarusplugin.services.api.IGraphStorage"
                         serviceImplementation="org.example.lazarusplugin.services.impl.SemGraphStorage"/>
-        <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphBuilder"
+        <projectService serviceInterface="org.example.lazarusplugin.services.api.IGraphBuilder"
                         serviceImplementation="org.example.lazarusplugin.services.impl.PsiGraphBuilder"/>
-        <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphReader"
+        <projectService serviceInterface="org.example.lazarusplugin.services.api.IGraphReader"
                         serviceImplementation="org.example.lazarusplugin.services.impl.SemGraphReader"/>
-        <projectService serviceInterface="org.example.lazarusplugin.services.api.AgentService"
+        <projectService serviceInterface="org.example.lazarusplugin.services.api.IAgentService"
                         serviceImplementation="org.example.lazarusplugin.services.impl.LLMAgentService"/>
-        <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphAnalysis"
+        <projectService serviceInterface="org.example.lazarusplugin.services.api.IGraphAnalysis"
                         serviceImplementation="org.example.lazarusplugin.services.impl.SemGraphAnalysis"/>
     </extensions>
 

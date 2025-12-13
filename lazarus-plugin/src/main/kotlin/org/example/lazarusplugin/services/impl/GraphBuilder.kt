@@ -3,18 +3,16 @@ package org.example.lazarusplugin.services.impl
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.vfs.VirtualFile
 import org.example.lazarusplugin.models.*
-import org.example.lazarusplugin.services.api.GraphBuilder
-import org.example.lazarusplugin.services.api.GraphStorage
+import org.example.lazarusplugin.services.api.IGraphStorage
 
 @Service(Service.Level.PROJECT)
-class PsiGraphBuilder(
+class GraphBuilder(
     private val project: Project
-) : GraphBuilder {
+) : IGraphBuilder {
 
-    private val storage: GraphStorage
-        get() = project.service<GraphStorage>()
+    private val storage: IGraphStorage
+        get() = project.service<IGraphStorage>()
 
     override fun buildGraph() {
         val newGraph = IndexedCodeGraph()

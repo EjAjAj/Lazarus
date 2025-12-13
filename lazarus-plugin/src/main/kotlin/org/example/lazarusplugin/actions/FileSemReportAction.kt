@@ -5,7 +5,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.components.service
-import org.example.lazarusplugin.services.api.GraphStorage
+import org.example.lazarusplugin.services.api.IGraphStorage
 import org.example.lazarusplugin.ui.MarkdownReportDialog
 
 class FileSemReportAction : AnAction("Generate Semantic Report") {
@@ -68,7 +68,7 @@ This is a dummy semantic analysis report. In production, this would contain:
         val psiFile = e.getData(CommonDataKeys.PSI_FILE)
 
         // Action is enabled only if file is open AND graph is ready
-        val graphReady = project?.service<GraphStorage>()?.isGraphReady() ?: false
+        val graphReady = project?.service<IGraphStorage>()?.isGraphReady() ?: false
         e.presentation.isEnabledAndVisible = editor != null && psiFile != null && graphReady
     }
 }

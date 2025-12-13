@@ -5,7 +5,7 @@ import com.intellij.openapi.vfs.VirtualFile
 /**
  * Interface for communicating with external LLM agent
  */
-interface AgentService {
+interface IAgentService {
 
     /**
      * Get summary of changes between old file and new file

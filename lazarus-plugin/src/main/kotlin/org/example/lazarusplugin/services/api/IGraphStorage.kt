@@ -5,7 +5,7 @@ import org.example.lazarusplugin.models.IndexedCodeGraph
 /**
  * Interface for managing and persisting the indexed code graph
  */
-interface GraphStorage {
+interface IGraphStorage {
 
     /**
      * Get the current graph instance

@@ -3,7 +3,7 @@ package org.example.lazarusplugin.services.api
 /**
  * Interface for building and updating the code graph
  */
-interface GraphBuilder {
+interface IGraphBuilder {
     /**
      * Build a complete graph from project files
      */

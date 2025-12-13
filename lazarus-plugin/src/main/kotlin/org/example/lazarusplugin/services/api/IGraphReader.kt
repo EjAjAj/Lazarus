@@ -1,11 +1,9 @@
 package org.example.lazarusplugin.services.api
 
-import org.example.lazarusplugin.models.*
-
 /**
  * Interface for querying and reading from the code graph
  */
-interface GraphReader {
+interface IGraphReader {
 
     /**
      * Get facts about a specific file

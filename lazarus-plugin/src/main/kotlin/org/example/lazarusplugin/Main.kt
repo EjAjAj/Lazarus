@@ -11,8 +11,8 @@ import org.example.lazarusplugin.services.GraphTrackingService
 import org.slf4j.LoggerFactory
 =======
 import com.intellij.openapi.components.service
-import org.example.lazarusplugin.services.api.GraphStorage
-import org.example.lazarusplugin.services.api.GraphBuilder
+import org.example.lazarusplugin.services.api.IGraphStorage
+import org.example.lazarusplugin.services.api.IGraphBuilder
 >>>>>>> origin/develop
 
 class Main : ProjectActivity {
@@ -117,8 +117,8 @@ class Main : ProjectActivity {
         })
 =======
         // Initialize services
-        val graphStorage = project.service<GraphStorage>()
-        val graphBuilder = project.service<GraphBuilder>()
+        val graphStorage = project.service<IGraphStorage>()
+        val graphBuilder = project.service<IGraphBuilder>()
 
         // Try to load existing graph, if not found build it automatically
         if (!graphStorage.load()) {
