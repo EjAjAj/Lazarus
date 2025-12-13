@@ -1,6 +1,6 @@
 package org.example.lazarusplugin.models
 
-data class GraphNode(
+class GraphNode(
     val id: NodeId,
     val kind: NodeKind,
     val psiRef: PsiRef?,
@@ -9,3 +9,9 @@ data class GraphNode(
     val outgoing: MutableSet<GraphEdge> = mutableSetOf(),
     val incoming: MutableSet<GraphEdge> = mutableSetOf()
 )
+{
+    override fun toString(): String {
+        return "GraphNode(id=$id, kind=$kind, context='$context', metadata=$metadata)"
+    }
+
+}
