@@ -24,6 +24,18 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
+        <postStartupActivity implementation="org.example.lazarusplugin.Main"/>
 
+        <!-- Service registrations -->
+        <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphStorage"
+                        serviceImplementation="org.example.lazarusplugin.services.impl.SemGraphStorage"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphBuilder"
+                        serviceImplementation="org.example.lazarusplugin.services.impl.PsiGraphBuilder"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphReader"
+                        serviceImplementation="org.example.lazarusplugin.services.impl.SemGraphReader"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.api.AgentService"
+                        serviceImplementation="org.example.lazarusplugin.services.impl.LLMAgentService"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphAnalysis"
+                        serviceImplementation="org.example.lazarusplugin.services.impl.SemGraphAnalysis"/>
     </extensions>
 </idea-plugin>
