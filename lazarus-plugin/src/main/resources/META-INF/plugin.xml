@@ -51,10 +51,22 @@
 
         <action id="org.example.lazarusplugin.GlobalSemReportAction"
                 class="org.example.lazarusplugin.actions.GlobalSemReportAction"
-                text="Generate Global Semantic Report"
-                description="Generate semantic report for the entire codebase">
+                text="Global Semantic Report"
+                description="Generate semantic report"
+                icon="AllIcons.Actions.Preview">
+            <add-to-group group-id="MainToolbarRight" anchor="before" relative-to-action="RunnerActions"/>
             <add-to-group group-id="ToolsMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt shift S"/>
+        </action>
+
+        <action id="org.example.lazarusplugin.GitDiffSemReportAction"
+                class="org.example.lazarusplugin.actions.GitDiffSemReportAction"
+                text="Fetch-Compare Semantics"
+                description="Fetch remote changes and show semantic diff report"
+                icon="AllIcons.Actions.Diff">
+            <add-to-group group-id="MainToolbarRight" anchor="before" relative-to-action="RunnerActions"/>
+            <add-to-group group-id="Vcs.MainMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt shift D"/>
         </action>
     </actions>
 </idea-plugin>
