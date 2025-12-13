@@ -7,6 +7,10 @@ import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.openapi.ui.Messages
 import com.intellij.ui.components.JBScrollPane
 import com.intellij.util.ui.JBUI
+import com.intellij.util.ui.UIUtil
+import org.intellij.markdown.flavours.commonmark.CommonMarkFlavourDescriptor
+import org.intellij.markdown.html.HtmlGenerator
+import org.intellij.markdown.parser.MarkdownParser
 import java.awt.BorderLayout
 import java.awt.Dimension
 import javax.swing.*
@@ -39,13 +43,14 @@ class MarkdownReportDialog(
 
         virtualFileWrapper?.let { wrapper ->
             try {
-                val file = wrapper.getFile(true)
+                val file = wrapper.file
                 file.writeText(markdownContent)
                 Messages.showInfoMessage(
                     project,
                     "Report saved successfully to:\n${file.absolutePath}",
                     "Report Saved"
                 )
+                close(OK_EXIT_CODE)
             } catch (e: Exception) {
                 Messages.showErrorDialog(
                     project,
@@ -60,18 +65,40 @@ class MarkdownReportDialog(
         val panel = JPanel(BorderLayout())
         panel.border = JBUI.Borders.empty(10)
 
-        // Create text area for markdown content
-        val textArea = JTextArea(markdownContent).apply {
+        // Convert markdown to HTML
+        val flavour = CommonMarkFlavourDescriptor()
+        val parsedTree = MarkdownParser(flavour).buildMarkdownTreeFromString(markdownContent)
+        val html = HtmlGenerator(markdownContent, parsedTree, flavour).generateHtml()
+
+        // Load CSS from resources
+        val cssContent = javaClass.getResourceAsStream("/html/markdown-report-style.css")
+            ?.bufferedReader()
+            ?.use { it.readText() }
+            ?: ""
+
+        // Create styled HTML with CSS from resources
+        val styledHtml = """
+            <html>
+            <head>
+                <style>
+                    $cssContent
+                </style>
+            </head>
+            <body>$html</body>
+            </html>
+        """.trimIndent()
+
+        // Create JEditorPane to render HTML
+        val editorPane = JEditorPane("text/html", styledHtml).apply {
             isEditable = false
-            lineWrap = true
-            wrapStyleWord = true
-            font = font.deriveFont(13f)
+            background = UIUtil.getPanelBackground()
             border = JBUI.Borders.empty(5)
         }
 
-        // Wrap in scroll pane
-        val scrollPane = JBScrollPane(textArea).apply {
-            preferredSize = Dimension(700, 500)
+        // Wrap in scroll pane with no horizontal scrollbar
+        val scrollPane = JBScrollPane(editorPane).apply {
+            preferredSize = Dimension(900, 600)
+            horizontalScrollBarPolicy = JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
         }
 
         panel.add(scrollPane, BorderLayout.CENTER)
@@ -84,8 +111,14 @@ class MarkdownReportDialog(
                 saveReport()
             }
         }
+        saveAction.putValue(DialogWrapper.DEFAULT_ACTION, true)
 
-        okAction.putValue(Action.NAME, "Close")
-        return arrayOf(saveAction, okAction)
+        val closeAction = object : DialogWrapperAction("Close") {
+            override fun doAction(e: java.awt.event.ActionEvent?) {
+                close(OK_EXIT_CODE)
+            }
+        }
+
+        return arrayOf(saveAction, closeAction)
     }
 }
