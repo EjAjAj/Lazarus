@@ -62,26 +62,4 @@ class DependencyGraph {
         return visited
     }
 
-
-    fun addEdge(edge: GraphEdge) {
-        edges.add(edge)
-    }
-
-
-    fun getNode(id: NodeId): GraphNode? = nodes[id]
-
-
-    fun allNodes(): Collection<GraphNode> = nodes.values
-
-
-    fun allEdges(): Set<GraphEdge> = edges
-
-
-    fun outgoing(id: NodeId): List<GraphEdge> =
-        edges.filter { it.from == id }
-
-
-    fun incoming(id: NodeId): List<GraphEdge> =
-        edges.filter { it.to == id }
-    }
-
+}
