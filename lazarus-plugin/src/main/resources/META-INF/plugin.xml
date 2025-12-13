@@ -21,9 +21,21 @@
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
 
+    <depends>com.intellij.java</depends>
+
+
+
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
+        <projectService
+                serviceImplementation="org.example.lazarusplugin.services.GraphTrackingService"/>
+        <postStartupActivity
+                implementation="org.example.lazarusplugin.Main"/>
 
+        <notificationGroup
+                id="Graph Tracker"
+                displayType="BALLOON"/>
     </extensions>
+
 </idea-plugin>
