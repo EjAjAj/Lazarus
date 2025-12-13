@@ -14,8 +14,6 @@ import org.example.lazarusplugin.services.api.GraphBuilder
 
 class Main : ProjectActivity {
     
-    private val log = Logger.getInstance(Main::class.java)
-    
     override suspend fun execute(project: Project) {
         // Wait for project to be fully initialized
         Observation.awaitConfiguration(project)
