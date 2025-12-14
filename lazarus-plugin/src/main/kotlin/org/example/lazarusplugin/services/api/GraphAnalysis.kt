@@ -6,11 +6,6 @@ package org.example.lazarusplugin.services.api
  */
 interface GraphAnalysis {
     /**
-     * Analyze a single file
-     */
-    suspend fun analyzeFile(filePath: String): String
-
-    /**
      * Analyze a cluster of files
      */
     suspend fun analyzeCluster(filePaths: List<String>): String
