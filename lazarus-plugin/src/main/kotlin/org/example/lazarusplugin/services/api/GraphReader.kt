@@ -10,5 +10,5 @@ interface GraphReader {
     /**
      * Get facts about a specific file
      */
-    fun getFileFacts(filePath: String): Array<String>
+    fun getFileFacts(filePath: String, relevantFiles: Array<String>): FileReport
 }

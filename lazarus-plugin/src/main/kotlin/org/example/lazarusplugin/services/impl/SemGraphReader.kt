@@ -16,8 +16,11 @@ class SemGraphReader(
     private val storage: GraphStorage
 ) : GraphReader {
 
-    override fun getFileFacts(filePath: String): Array<String> {
-        return Array(0) { "" }
+    override fun getFileFacts(
+        filePath: String,
+        relevantFiles: Array<String>
+    ): FileReport {
+        TODO("Not yet implemented")
     }
 
 }
