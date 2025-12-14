@@ -1,4 +1,4 @@
-package org.example.lazarusplugin.services.impl
+package org.example.lazarusplugin.services.graph.impl
 
 import com.intellij.diff.contents.FileContent
 import com.intellij.openapi.components.Service
@@ -6,13 +6,12 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.example.lazarusplugin.services.api.AgentFileDiffInput
-import org.example.lazarusplugin.services.api.AgentFileInput
-import org.example.lazarusplugin.services.api.AgentService
-import org.example.lazarusplugin.services.api.FileReport
-import org.example.lazarusplugin.services.api.GraphAnalysis
-import org.example.lazarusplugin.services.api.GraphReader
 import org.example.lazarusplugin.services.git.api.IDiffService
+import org.example.lazarusplugin.services.graph.api.AgentFileDiffInput
+import org.example.lazarusplugin.services.graph.api.AgentFileInput
+import org.example.lazarusplugin.services.graph.api.AgentService
+import org.example.lazarusplugin.services.graph.api.GraphAnalysis
+import org.example.lazarusplugin.services.graph.api.GraphReader
 import org.example.lazarusplugin.utils.FileUtils
 
 /**
@@ -38,8 +37,9 @@ class SemGraphAnalysis(
         val fileContent = FileUtils.getFileContent(project, filePath)
 
         agentService.getFileSummary(
-            AgentFileInput(fileContent = fileContent
-            ,fileReport=fileReport), projectReport)
+            AgentFileInput(
+                fileContent = fileContent, fileReport = fileReport
+            ), projectReport)
     }
 
     override suspend fun makeInitProjectReport(): String = withContext(Dispatchers.IO) {

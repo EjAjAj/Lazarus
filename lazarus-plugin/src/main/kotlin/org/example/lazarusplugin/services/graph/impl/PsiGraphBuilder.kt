@@ -1,4 +1,4 @@
-package org.example.lazarusplugin.services.impl
+package org.example.lazarusplugin.services.graph.impl
 
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.Service
@@ -7,9 +7,10 @@ import com.intellij.openapi.project.Project
 import com.intellij.psi.*
 import com.intellij.psi.util.PsiTreeUtil
 import org.example.lazarusplugin.models.graph.*
-import org.example.lazarusplugin.services.api.GraphBuilder
-import org.example.lazarusplugin.services.api.GraphStorage
+import org.example.lazarusplugin.services.graph.api.GraphBuilder
+import org.example.lazarusplugin.services.graph.api.GraphStorage
 import org.example.lazarusplugin.models.graph.IndexedCodeGraph
+
 
 @Service(Service.Level.PROJECT)
 class PsiGraphBuilder(

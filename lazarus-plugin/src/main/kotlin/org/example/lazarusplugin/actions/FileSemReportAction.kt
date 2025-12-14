@@ -9,8 +9,8 @@ import com.intellij.openapi.components.service
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.example.lazarusplugin.services.api.GraphAnalysis
-import org.example.lazarusplugin.services.api.GraphStorage
+import org.example.lazarusplugin.services.graph.api.GraphAnalysis
+import org.example.lazarusplugin.services.graph.api.GraphStorage
 import org.example.lazarusplugin.ui.MarkdownReportDialog
 
 class FileSemReportAction : AnAction("Generate Semantic Report") {

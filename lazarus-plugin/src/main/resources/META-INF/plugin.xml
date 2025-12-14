@@ -30,24 +30,24 @@
         <!-- Service registrations -->
         <applicationService serviceImplementation="org.example.lazarusplugin.utils.HttpClient"/>
 
-        <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphStorage"
-                        serviceImplementation="org.example.lazarusplugin.services.impl.SemGraphStorage"/>
-        <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphBuilder"
-                        serviceImplementation="org.example.lazarusplugin.services.impl.PsiGraphBuilder"/>
-        <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphReader"
-                        serviceImplementation="org.example.lazarusplugin.services.impl.SemGraphReader"/>
-        <projectService serviceInterface="org.example.lazarusplugin.services.api.AgentService"
-                        serviceImplementation="org.example.lazarusplugin.services.impl.LLMAgentService"/>
-        <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphAnalysis"
-                        serviceImplementation="org.example.lazarusplugin.services.impl.SemGraphAnalysis"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.graph.api.GraphStorage"
+                        serviceImplementation="org.example.lazarusplugin.services.graph.impl.SemGraphStorage"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.graph.api.GraphBuilder"
+                        serviceImplementation="org.example.lazarusplugin.services.graph.impl.PsiGraphBuilder"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.graph.api.GraphReader"
+                        serviceImplementation="org.example.lazarusplugin.services.graph.impl.SemGraphReader"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.graph.api.AgentService"
+                        serviceImplementation="org.example.lazarusplugin.services.graph.impl.LLMAgentService"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.graph.api.GraphAnalysis"
+                        serviceImplementation="org.example.lazarusplugin.services.graph.impl.SemGraphAnalysis"/>
 
         <!-- Git services -->
-        <projectService serviceInterface="org.example.lazarusplugin.git.service.ICommandRepository"
-                        serviceImplementation="CommandRepository"/>
-        <projectService serviceInterface="org.example.lazarusplugin.git.service.IDiffRepository"
-                        serviceImplementation="org.example.lazarusplugin.git.repository.DiffRepository"/>
-        <projectService serviceInterface="org.example.lazarusplugin.git.service.IDiffService"
-                        serviceImplementation="org.example.lazarusplugin.git.service.RobustGitDiffService"/>
+        <projectService serviceInterface="org.example.lazarusplugin.repository.api.ICommandRepository"
+                        serviceImplementation="org.example.lazarusplugin.repository.impl.CommandRepository"/>
+        <projectService serviceInterface="org.example.lazarusplugin.repository.api.IDiffRepository"
+                        serviceImplementation="org.example.lazarusplugin.repository.impl.DiffRepository"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.git.api.IDiffService"
+                        serviceImplementation="org.example.lazarusplugin.services.git.impl.RobustGitDiffService"/>
     </extensions>
 
     <actions>

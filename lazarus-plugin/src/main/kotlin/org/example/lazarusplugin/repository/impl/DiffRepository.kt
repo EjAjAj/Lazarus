@@ -1,12 +1,11 @@
-package org.example.lazarusplugin.git.repository
+package org.example.lazarusplugin.repository.impl
 
-import CommandRepository
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
-import org.example.lazarusplugin.git.service.IDiffRepository
-import org.example.lazarusplugin.git.models.FileChange
+import org.example.lazarusplugin.models.git.FileChange
+import org.example.lazarusplugin.repository.api.IDiffRepository
 
 @Service(Service.Level.PROJECT)
 class DiffRepository(private val project: Project) : IDiffRepository {

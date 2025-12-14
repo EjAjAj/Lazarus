@@ -1,6 +1,6 @@
-package org.example.lazarusplugin.git.service
+package org.example.lazarusplugin.repository.api
 
-import org.example.lazarusplugin.git.models.FileChange
+import org.example.lazarusplugin.models.git.FileChange
 
 interface IDiffRepository {
     fun getDiff(fromRef: String, toRef: String, filePath: String? = null): String

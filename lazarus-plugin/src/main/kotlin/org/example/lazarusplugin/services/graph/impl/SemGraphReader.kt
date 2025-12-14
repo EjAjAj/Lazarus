@@ -1,13 +1,12 @@
-package org.example.lazarusplugin.services.impl
+package org.example.lazarusplugin.services.graph.impl
 
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
-import org.example.lazarusplugin.models.*
 import org.example.lazarusplugin.models.graph.Edge
-import org.example.lazarusplugin.services.api.FileReport
-import org.example.lazarusplugin.services.api.GraphReader
-import org.example.lazarusplugin.services.api.GraphStorage
+import org.example.lazarusplugin.services.graph.api.FileReport
+import org.example.lazarusplugin.services.graph.api.GraphReader
+import org.example.lazarusplugin.services.graph.api.GraphStorage
 import org.intellij.markdown.lexer.push
 
 /**

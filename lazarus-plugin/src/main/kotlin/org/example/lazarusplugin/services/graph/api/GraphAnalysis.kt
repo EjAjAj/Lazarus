@@ -1,4 +1,4 @@
-package org.example.lazarusplugin.services.api
+package org.example.lazarusplugin.services.graph.api
 
 /**
  * Coordinator service that orchestrates graph reading and agent analysis

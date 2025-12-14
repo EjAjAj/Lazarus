@@ -1,4 +1,4 @@
-package org.example.lazarusplugin.services.api
+package org.example.lazarusplugin.services.graph.api
 
 import org.example.lazarusplugin.models.graph.IndexedCodeGraph
 

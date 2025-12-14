@@ -1,8 +1,10 @@
+package org.example.lazarusplugin.repository.impl
+
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import org.example.lazarusplugin.git.service.ICommandRepository
-import org.example.lazarusplugin.git.models.CommandResult
+import org.example.lazarusplugin.models.git.CommandResult
 import java.io.File
 import java.util.concurrent.TimeUnit
 

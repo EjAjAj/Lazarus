@@ -9,8 +9,8 @@ import com.intellij.notification.NotificationType
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.startup.ProjectActivity
 import com.intellij.openapi.components.service
-import org.example.lazarusplugin.services.api.GraphStorage
-import org.example.lazarusplugin.services.api.GraphBuilder
+import org.example.lazarusplugin.services.graph.api.GraphStorage
+import org.example.lazarusplugin.services.graph.api.GraphBuilder
 
 class Main : ProjectActivity {
     

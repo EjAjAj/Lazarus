@@ -1,6 +1,6 @@
 package org.example.lazarusplugin.git.service
 
-import org.example.lazarusplugin.git.models.CommandResult
+import org.example.lazarusplugin.models.git.CommandResult
 
 interface ICommandRepository {
     fun executeCommand(args: List<String>): CommandResult

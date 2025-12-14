@@ -1,9 +1,9 @@
-package org.example.lazarusplugin.services.impl
+package org.example.lazarusplugin.services.graph.impl
 
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project
 import org.example.lazarusplugin.models.graph.IndexedCodeGraph
-import org.example.lazarusplugin.services.api.GraphStorage
+import org.example.lazarusplugin.services.graph.api.GraphStorage
 import java.io.File
 
 /**

@@ -1,4 +1,4 @@
-package org.example.lazarusplugin.services.impl
+package org.example.lazarusplugin.services.graph.impl
 
 import com.intellij.diff.requests.DiffRequest
 import com.intellij.openapi.components.Service
@@ -8,10 +8,10 @@ import com.intellij.openapi.vfs.VirtualFile
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import org.example.lazarusplugin.services.api.AgentFileDiffInput
-import org.example.lazarusplugin.services.api.AgentFileInput
-import org.example.lazarusplugin.services.api.AgentService
-import org.example.lazarusplugin.services.api.FileReport
+import org.example.lazarusplugin.services.graph.api.AgentFileDiffInput
+import org.example.lazarusplugin.services.graph.api.AgentFileInput
+import org.example.lazarusplugin.services.graph.api.AgentService
+import org.example.lazarusplugin.services.graph.api.FileReport
 import org.example.lazarusplugin.utils.HttpClient
 
 

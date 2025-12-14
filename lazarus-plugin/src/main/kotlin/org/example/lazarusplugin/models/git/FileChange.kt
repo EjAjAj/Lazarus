@@ -1,4 +1,4 @@
-package org.example.lazarusplugin.git.models
+package org.example.lazarusplugin.models.git
 
 data class FileChange(
     val status: String,

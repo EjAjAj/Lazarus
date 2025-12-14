@@ -1,6 +1,4 @@
-package org.example.lazarusplugin.services.api
-
-import com.intellij.openapi.vfs.VirtualFile
+package org.example.lazarusplugin.services.graph.api
 
 /**
  * Interface for communicating with external LLM agent

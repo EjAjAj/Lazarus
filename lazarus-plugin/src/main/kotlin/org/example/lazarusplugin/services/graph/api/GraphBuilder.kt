@@ -1,4 +1,4 @@
-package org.example.lazarusplugin.services.api
+package org.example.lazarusplugin.services.graph.api
 
 /**
  * Interface for building and updating the code graph

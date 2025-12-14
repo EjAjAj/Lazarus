@@ -6,8 +6,8 @@ import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.components.service
 import kotlinx.coroutines.runBlocking
-import org.example.lazarusplugin.services.api.GraphAnalysis
-import org.example.lazarusplugin.services.api.GraphStorage
+import org.example.lazarusplugin.services.graph.api.GraphAnalysis
+import org.example.lazarusplugin.services.graph.api.GraphStorage
 import org.example.lazarusplugin.ui.MarkdownReportDialog
 
 class GitDiffSemReportAction : AnAction("Fetch & Compare Semantics") {
