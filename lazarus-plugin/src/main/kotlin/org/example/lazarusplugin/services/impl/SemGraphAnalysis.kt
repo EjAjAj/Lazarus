@@ -1,13 +1,16 @@
 package org.example.lazarusplugin.services.impl
 
+import com.intellij.diff.contents.FileContent
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.example.lazarusplugin.git.service.IDiffService
+import org.example.lazarusplugin.services.api.AgentFileDiffInput
 import org.example.lazarusplugin.services.api.AgentFileInput
 import org.example.lazarusplugin.services.api.AgentService
+import org.example.lazarusplugin.services.api.FileReport
 import org.example.lazarusplugin.services.api.GraphAnalysis
 import org.example.lazarusplugin.services.api.GraphReader
 import org.example.lazarusplugin.utils.FileUtils
@@ -24,15 +27,44 @@ class SemGraphAnalysis(
     private val graphReader: GraphReader by lazy { project.service<GraphReader>() }
     private val agentService: AgentService by lazy { project.service<AgentService>() }
     private val gitDiffService: IDiffService by lazy { project.service<IDiffService>() }
+    private var projectReport: String = ""
 
     override suspend fun analyzeFile(filePath: String): String = withContext(Dispatchers.IO) {
+        if (projectReport.isEmpty()) {
+            projectReport = makeInitProjectReport()
+        }
+
         val fileReport = graphReader.getFileFacts(filePath, graphReader.getHotFiles())
         val fileContent = FileUtils.getFileContent(project, filePath)
 
-        agentService.getFileSummary(fileReport, fileContent)
+        agentService.getFileSummary(
+            AgentFileInput(fileContent = fileContent
+            ,fileReport=fileReport), projectReport)
     }
 
+    override suspend fun makeInitProjectReport(): String = withContext(Dispatchers.IO) {
+        if (projectReport.isEmpty()) {
+            val hotFiles = graphReader.getHotFiles().take(4)
+            // Generate file reports for all hot files
+            val agentFileInputs = hotFiles.map { filePath ->
+                val fileReport = graphReader.getFileFacts(filePath, ArrayList(hotFiles))
+                val fileContent = FileUtils.getFileContent(project, filePath)
+
+                AgentFileInput(
+                    fileContent = fileContent,
+                    fileReport = fileReport
+                )
+            }
+
+            projectReport = agentService.generateProjectReport(ArrayList(agentFileInputs))
+        }
+        projectReport
+    }
     override suspend fun analyzeRemoteDiff(): String = withContext(Dispatchers.IO) {
+        if (projectReport.isEmpty()) {
+            projectReport = makeInitProjectReport()
+        }
+
         // Get all files that changed with diffs
         val changedFilesWithDiffs = gitDiffService.getChangedFilesWithDiffs()
 
@@ -41,21 +73,18 @@ class SemGraphAnalysis(
         }
 
         // Create AgentFileInput array
-        println(ArrayList(changedFilesWithDiffs.keys))
-        val agentInputs = changedFilesWithDiffs.map { (filePath, diff) ->
+        val agentFileDiffInputs = changedFilesWithDiffs.map { (filePath, diff) ->
             // Get file facts from GraphReader
             val fileReport = graphReader.getFileFacts(filePath, ArrayList(changedFilesWithDiffs.keys))
             // Get file content
             val fileContent = FileUtils.getFileContent(project, filePath)
 
-            AgentFileInput(
+            AgentFileDiffInput(
                 fileContent = fileContent,
                 fileDiff = diff,
                 fileReport = fileReport
             )
         }
-
-        // Send to agent service and return result
-        agentService.generateReport(agentInputs)
+        agentService.generateDiffReport(ArrayList(agentFileDiffInputs), projectReport)
     }
 }

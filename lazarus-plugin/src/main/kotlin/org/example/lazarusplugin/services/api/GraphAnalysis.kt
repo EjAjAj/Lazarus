@@ -11,4 +11,6 @@ interface GraphAnalysis {
     suspend fun analyzeFile(filePath: String): String
 
     suspend fun  analyzeRemoteDiff(): String
+
+    suspend fun makeInitProjectReport(): String
 }

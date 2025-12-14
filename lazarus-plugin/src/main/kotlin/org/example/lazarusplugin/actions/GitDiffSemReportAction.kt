@@ -3,6 +3,7 @@ package org.example.lazarusplugin.actions
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.ActionUpdateThread
+import com.intellij.openapi.application.invokeLater
 import com.intellij.openapi.components.service
 import kotlinx.coroutines.runBlocking
 import org.example.lazarusplugin.services.api.GraphAnalysis
@@ -20,19 +21,21 @@ class GitDiffSemReportAction : AnAction("Fetch & Compare Semantics") {
 
         // Get GraphAnalysis service
         val graphAnalysis = project.service<GraphAnalysis>()
+        println(graphAnalysis)
 
         // Get analysis result from analyzeRemoteDiff
         val markdownContent = runBlocking {
             graphAnalysis.analyzeRemoteDiff()
         }
 
-        // Show dialog with markdown content and merge button
-        val dialog = MarkdownReportDialog(
-            project = project,
-            title = "Git Semantic Diff Report",
-            markdownContent = markdownContent
-        )
-        dialog.show()
+        invokeLater {
+            val dialog = MarkdownReportDialog(
+                project = project,
+                title = "Git Semantic Diff Report",
+                markdownContent = markdownContent
+            )
+            dialog.show()
+        }
     }
 
     override fun update(e: AnActionEvent) {

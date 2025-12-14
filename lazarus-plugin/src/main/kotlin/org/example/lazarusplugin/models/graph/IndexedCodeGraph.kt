@@ -31,7 +31,6 @@ class IndexedCodeGraph(
     }
 
     fun getRelevantEdges(filename: String, depth: Int): ArrayList<Edge> {
-        println(filename)
         val startNode = _filepathToNode[filename] ?: return ArrayList()
         val visitedEdges = mutableSetOf<Edge>()
         getRelevantEdges(startNode, depth, visitedEdges)
