@@ -6,13 +6,13 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.example.lazarusplugin.git.service.IDiffService
 import org.example.lazarusplugin.services.api.AgentFileDiffInput
 import org.example.lazarusplugin.services.api.AgentFileInput
 import org.example.lazarusplugin.services.api.AgentService
 import org.example.lazarusplugin.services.api.FileReport
 import org.example.lazarusplugin.services.api.GraphAnalysis
 import org.example.lazarusplugin.services.api.GraphReader
+import org.example.lazarusplugin.services.git.api.IDiffService
 import org.example.lazarusplugin.utils.FileUtils
 
 /**

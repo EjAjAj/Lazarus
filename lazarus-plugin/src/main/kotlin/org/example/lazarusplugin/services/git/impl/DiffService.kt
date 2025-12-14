@@ -7,6 +7,7 @@ import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import org.example.lazarusplugin.git.models.FileChange
 import org.example.lazarusplugin.git.repository.DiffRepository
+import org.example.lazarusplugin.services.git.api.IDiffService
 
 @Service(Service.Level.PROJECT)
 class RobustGitDiffService(private val project: Project) : IDiffService {
