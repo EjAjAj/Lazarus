@@ -1,0 +1,24 @@
+# Logging configuration for Lazarus Plugin
+# This helps ensure logs are visible during development
+
+# Root logger level
+rootLogger.level=INFO
+rootLogger.appenderRef.stdout.ref=STDOUT
+
+# Console appender
+appender.console.type=Console
+appender.console.name=STDOUT
+appender.console.layout.type=PatternLayout
+appender.console.layout.pattern=[%d{HH:mm:ss.SSS}] [%level] [%logger{36}] - %msg%n
+
+# Logger for our plugin
+logger.lazarus.name=org.example.lazarusplugin
+logger.lazarus.level=DEBUG
+logger.lazarus.additivity=false
+logger.lazarus.appenderRef.stdout.ref=STDOUT
+
+# JGit logging
+logger.jgit.name=org.eclipse.jgit
+logger.jgit.level=INFO
+logger.jgit.additivity=false
+logger.jgit.appenderRef.stdout.ref=STDOUT

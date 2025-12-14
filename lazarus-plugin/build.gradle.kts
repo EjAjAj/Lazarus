@@ -1,6 +1,7 @@
 plugins {
     id("java")
     id("org.jetbrains.kotlin.jvm") version "2.1.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
     id("org.jetbrains.intellij.platform") version "2.7.1"
     id("jacoco")
 }
@@ -33,8 +34,12 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.slf4j:slf4j-api:2.0.12")
     implementation("ch.qos.logback:logback-classic:1.5.6")
+    implementation("org.eclipse.jgit:org.eclipse.jgit:6.8.0.202311291450-r")
+    implementation("org.slf4j:slf4j-simple:2.0.9")
+    implementation("org.eclipse.jgit:org.eclipse.jgit.ssh.apache:6.8.0.202311291450-r")
+    implementation("com.jcraft:jsch:0.1.55")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
 }
-
 intellijPlatform {
     pluginConfiguration {
         ideaVersion {

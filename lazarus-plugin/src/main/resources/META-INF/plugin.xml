@@ -20,10 +20,64 @@
     <!-- Product and plugin compatibility requirements.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.java</depends>
 
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
+        <postStartupActivity implementation="org.example.lazarusplugin.Main"/>
 
+        <!-- Service registrations -->
+        <applicationService serviceImplementation="org.example.lazarusplugin.utils.HttpClient"/>
+
+        <projectService serviceInterface="org.example.lazarusplugin.services.graph.api.GraphStorage"
+                        serviceImplementation="org.example.lazarusplugin.services.graph.impl.SemGraphStorage"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.graph.api.GraphBuilder"
+                        serviceImplementation="org.example.lazarusplugin.services.graph.impl.PsiGraphBuilder"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.graph.api.GraphReader"
+                        serviceImplementation="org.example.lazarusplugin.services.graph.impl.SemGraphReader"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.graph.api.AgentService"
+                        serviceImplementation="org.example.lazarusplugin.services.graph.impl.LLMAgentService"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.graph.api.GraphAnalysis"
+                        serviceImplementation="org.example.lazarusplugin.services.graph.impl.SemGraphAnalysis"/>
+
+        <!-- Git services -->
+        <projectService serviceInterface="org.example.lazarusplugin.repository.api.ICommandRepository"
+                        serviceImplementation="org.example.lazarusplugin.repository.impl.CommandRepository"/>
+        <projectService serviceInterface="org.example.lazarusplugin.repository.api.IDiffRepository"
+                        serviceImplementation="org.example.lazarusplugin.repository.impl.DiffRepository"/>
+        <projectService serviceInterface="org.example.lazarusplugin.services.git.api.IDiffService"
+                        serviceImplementation="org.example.lazarusplugin.services.git.impl.DiffService"/>
     </extensions>
+
+    <actions>
+        <action id="org.example.lazarusplugin.FileSemReportAction"
+                class="org.example.lazarusplugin.actions.FileSemReportAction"
+                text="Generate Semantic Report"
+                description="Generate semantic report for the currently open file">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt S"/>
+        </action>
+
+        <action id="org.example.lazarusplugin.GlobalSemReportAction"
+                class="org.example.lazarusplugin.actions.GlobalSemReportAction"
+                text="Global Semantic Report"
+                description="Generate semantic report"
+                icon="AllIcons.Actions.Preview">
+            <add-to-group group-id="MainToolbarRight" anchor="before" relative-to-action="RunnerActions"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt shift S"/>
+        </action>
+
+        <action id="org.example.lazarusplugin.GitDiffSemReportAction"
+                class="org.example.lazarusplugin.actions.GitDiffSemReportAction"
+                text="Fetch-Compare Semantics"
+                description="Fetch remote changes and show semantic diff report"
+                icon="AllIcons.Actions.Diff">
+            <add-to-group group-id="MainToolbarRight" anchor="before" relative-to-action="RunnerActions"/>
+            <add-to-group group-id="Vcs.MainMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt shift D"/>
+        </action>
+    </actions>
 </idea-plugin>
