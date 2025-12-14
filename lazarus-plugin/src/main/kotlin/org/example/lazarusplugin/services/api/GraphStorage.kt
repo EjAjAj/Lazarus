@@ -1,6 +1,6 @@
 package org.example.lazarusplugin.services.api
 
-import org.example.lazarusplugin.models.IndexedCodeGraph
+import org.example.lazarusplugin.models.graph.IndexedCodeGraph
 
 /**
  * Interface for managing and persisting the indexed code graph
