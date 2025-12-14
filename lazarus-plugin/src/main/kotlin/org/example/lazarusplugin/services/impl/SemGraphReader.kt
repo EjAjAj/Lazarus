@@ -25,7 +25,7 @@ class SemGraphReader(
     ): FileReport {
         val connectedFiles: MutableSet<String> = mutableSetOf()
         val connectionDescriptions: ArrayList<String> = ArrayList()
-        val relativeEdges: ArrayList<Edge> = storage.getGraph().getRelativeEdges(filePath, 5)
+        val relativeEdges: ArrayList<Edge> = storage.getGraph().getRelevantEdges(filePath, 5)
 
         for (edge in relativeEdges) {
             connectionDescriptions.add(edge.toString())
