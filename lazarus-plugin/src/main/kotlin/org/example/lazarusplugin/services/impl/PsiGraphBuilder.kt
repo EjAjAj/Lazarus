@@ -7,6 +7,7 @@ import com.intellij.openapi.vfs.VirtualFile
 import org.example.lazarusplugin.models.*
 import org.example.lazarusplugin.services.api.GraphBuilder
 import org.example.lazarusplugin.services.api.GraphStorage
+import org.example.lazarusplugin.models.graph.IndexedCodeGraph
 
 @Service(Service.Level.PROJECT)
 class PsiGraphBuilder(
