@@ -4,7 +4,7 @@ class IndexedCodeGraph(
     private val _graph: CodeGraph = CodeGraph(),
     private val _semanticCache: NodeSemanticCache = NodeSemanticCache(),
     private val _nodesByDegreeDescending: ArrayList<NodeId> = ArrayList(),
-    private val _filenameToNode: MutableMap<String, Node> = mutableMapOf(),
+    private val _filepathToNode: MutableMap<String, Node> = mutableMapOf(),
 ) {
 
     enum class DetailLevel(val percentage: Double) {
@@ -15,10 +15,27 @@ class IndexedCodeGraph(
 
     // Graph iterators
 
+    fun getHottestFiles(detailLevel: DetailLevel = DetailLevel.LOW) : ArrayList<String> {
+        val hottestNodes = getTopDegreeNodes(detailLevel)
+        val hottestFiles = mutableSetOf<String>()
+        hottestNodes.forEach { node ->
+            // Skip if filename already compiled
+            if (node.filename in hottestFiles) {
+                return@forEach
+            }
+
+            hottestFiles.add(node.filename)
+        }
+
+        return ArrayList(hottestFiles)
+    }
+
     fun getRelevantEdges(filename: String, depth: Int): ArrayList<Edge> {
-        val startNode = _filenameToNode[filename] ?: return ArrayList()
+        println(filename)
+        val startNode = _filepathToNode[filename] ?: return ArrayList()
         val visitedEdges = mutableSetOf<Edge>()
         getRelevantEdges(startNode, depth, visitedEdges)
+        println(visitedEdges.size)
         return ArrayList(visitedEdges)
     }
 
@@ -65,7 +82,7 @@ class IndexedCodeGraph(
         _graph._nodes[node.id] = node
         _nodesByDegreeDescending.add(node.id)
         if (node.type == NodeType.FILE) {
-            _filenameToNode[node.filename] = node
+            _filepathToNode[node.filename] = node
         }
         resortNodesByDegree()
     }

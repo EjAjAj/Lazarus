@@ -135,7 +135,7 @@ class PsiGraphBuilder(
                         psiElementPointer = SmartPointerManager.getInstance(project).createSmartPsiElementPointer(superClass),
                         name = superClass.name ?: "Unknown",
                         type = NodeType.CLASS,
-                        filename = superClass.containingFile?.name ?: "Unknown"
+                        filename = superClass.containingFile?.virtualFile?.path ?: "Unknown"
                     )
                     graph.addNode(superClassNode)
                 }
@@ -205,7 +205,7 @@ class PsiGraphBuilder(
                             psiElementPointer = SmartPointerManager.getInstance(project).createSmartPsiElementPointer(resolvedMethod),
                             name = resolvedMethod.name,
                             type = NodeType.METHOD,
-                            filename = resolvedMethod.containingFile?.name ?: "Unknown"
+                            filename =  resolvedMethod.containingFile?.virtualFile?.path ?: "Unknown" ?: "Unknown"
                         )
                         graph.addNode(calledMethodNode)
                     }

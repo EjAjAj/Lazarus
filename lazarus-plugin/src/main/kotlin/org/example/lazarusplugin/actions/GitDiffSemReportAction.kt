@@ -9,9 +9,7 @@ import org.example.lazarusplugin.services.api.GraphAnalysis
 import org.example.lazarusplugin.services.api.GraphStorage
 import org.example.lazarusplugin.ui.MarkdownReportDialog
 
-class GitDiffSemReportAction(
-    private val graphAnalysis: GraphAnalysis
-) : AnAction("Fetch & Compare Semantics") {
+class GitDiffSemReportAction : AnAction("Fetch & Compare Semantics") {
 
     override fun getActionUpdateThread(): ActionUpdateThread {
         return ActionUpdateThread.BGT
@@ -19,6 +17,9 @@ class GitDiffSemReportAction(
 
     override fun actionPerformed(e: AnActionEvent) {
         val project = e.project ?: return
+
+        // Get GraphAnalysis service
+        val graphAnalysis = project.service<GraphAnalysis>()
 
         // Get analysis result from analyzeRemoteDiff
         val markdownContent = runBlocking {

@@ -13,14 +13,7 @@ data class AgentFileInput(
 
 interface AgentService {
 
-    /**
-     * Get summary of changes between old file and new file
-     */
-    suspend fun getChangesSummary(file: VirtualFile, filesFacts: Array<String>, newFile: VirtualFile): String
+    suspend fun getFileSummary(fileReport: FileReport, fileContent: String): String
 
-    /**
-     * Check if agent is available
-     */
     fun generateReport(inputs: List<AgentFileInput>): String
-    fun isAvailable(): Boolean
 }

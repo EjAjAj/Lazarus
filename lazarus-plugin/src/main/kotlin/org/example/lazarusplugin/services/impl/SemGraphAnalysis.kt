@@ -5,7 +5,7 @@ import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.example.lazarusplugin.git.domain.IDiffService
+import org.example.lazarusplugin.git.service.IDiffService
 import org.example.lazarusplugin.services.api.AgentFileInput
 import org.example.lazarusplugin.services.api.AgentService
 import org.example.lazarusplugin.services.api.GraphAnalysis
@@ -18,15 +18,18 @@ import org.example.lazarusplugin.utils.FileUtils
  */
 @Service(Service.Level.PROJECT)
 class SemGraphAnalysis(
-    private val project: Project,
-    private val graphReader: GraphReader,
-    private val agentService: AgentService
+    private val project: Project
 ) : GraphAnalysis {
-    private val gitDiffService: IDiffService = project.service()
+
+    private val graphReader: GraphReader by lazy { project.service<GraphReader>() }
+    private val agentService: AgentService by lazy { project.service<AgentService>() }
+    private val gitDiffService: IDiffService by lazy { project.service<IDiffService>() }
 
     override suspend fun analyzeFile(filePath: String): String = withContext(Dispatchers.IO) {
-        // Dummy implementation
-        "File analysis response (dummy)"
+        val fileReport = graphReader.getFileFacts(filePath, graphReader.getHotFiles())
+        val fileContent = FileUtils.getFileContent(project, filePath)
+
+        agentService.getFileSummary(fileReport, fileContent)
     }
 
     override suspend fun analyzeRemoteDiff(): String = withContext(Dispatchers.IO) {
@@ -38,10 +41,10 @@ class SemGraphAnalysis(
         }
 
         // Create AgentFileInput array
+        println(ArrayList(changedFilesWithDiffs.keys))
         val agentInputs = changedFilesWithDiffs.map { (filePath, diff) ->
             // Get file facts from GraphReader
-            val fileReport = graphReader.getFileFacts(filePath, emptyArray())
-
+            val fileReport = graphReader.getFileFacts(filePath, ArrayList(changedFilesWithDiffs.keys))
             // Get file content
             val fileContent = FileUtils.getFileContent(project, filePath)
 

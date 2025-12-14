@@ -1,6 +1,7 @@
 package org.example.lazarusplugin.services.impl
 
 import com.intellij.openapi.components.Service
+import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import org.example.lazarusplugin.models.*
 import org.example.lazarusplugin.models.graph.Edge
@@ -15,13 +16,15 @@ import org.intellij.markdown.lexer.push
  */
 @Service(Service.Level.PROJECT)
 class SemGraphReader(
-    private val project: Project,
-    private val storage: GraphStorage
+    private val project: Project
 ) : GraphReader {
+
+    private val storage: GraphStorage
+        get() = project.service<GraphStorage>()
 
     override fun getFileFacts(
         filePath: String,
-        relevantFiles: Array<String>
+        relevantFiles: ArrayList<String>
     ): FileReport {
         val connectedFiles: MutableSet<String> = mutableSetOf()
         val connectionDescriptions: ArrayList<String> = ArrayList()
@@ -40,6 +43,9 @@ class SemGraphReader(
         return FileReport(filePath=filePath,
             connectedFiles=ArrayList(connectedFiles),
             connectionDescriptions=connectionDescriptions )
+    }
+    override fun getHotFiles(): ArrayList<String>{
+        return storage.getGraph().getHottestFiles()
     }
 
 }

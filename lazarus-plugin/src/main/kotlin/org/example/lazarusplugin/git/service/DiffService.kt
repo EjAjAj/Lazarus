@@ -5,7 +5,6 @@ import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
-import org.example.lazarusplugin.git.domain.IDiffService
 import org.example.lazarusplugin.git.models.FileChange
 import org.example.lazarusplugin.git.repository.DiffRepository
 
@@ -53,17 +52,16 @@ class RobustGitDiffService(private val project: Project) : IDiffService {
             return emptyMap()
         }
 
-        println("Changed files:")
-        changedFiles.forEach { println(" - ${it.path}") }
-
         val currentBranch = commandRepo.getCurrentBranch()
+        val basePath = project.basePath ?: ""
         val diffs = mutableMapOf<String, String>()
 
         for (file in changedFiles) {
             val diff = diffRepo.getDiff("HEAD", "origin/$currentBranch", file.path)
 
             if (diff.isNotBlank()) {
-                diffs[file.path] = diff
+                val absolutePath = java.io.File(basePath, file.path).absolutePath
+                diffs[absolutePath] = diff
             } else {
                 log.debug("No diff for ${file.path}")
             }

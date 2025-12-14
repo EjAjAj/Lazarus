@@ -26,48 +26,8 @@ class Main : ProjectActivity {
         // Try to load existing graph, if not found build it automatically
         if (!graphStorage.load()) {
             ApplicationManager.getApplication().executeOnPooledThread {
-                println("Building semantic graph for project: ${project.name}")
                 graphBuilder.buildGraph()
                 println("Semantic graph build complete")
-
-                // Get the built graph
-                val graph = graphStorage.getGraph()
-
-                // Print graph statistics
-                println("=== Code Graph Built ===")
-                println("Total Nodes: ${graph.size()}")
-                println("Total Edges: ${graph.edges.size}")
-                println()
-
-                // Print first 20 edges
-                println("=== Edges (up to 20) ===")
-                graph.edges.values.take(20).forEachIndexed { index, edge ->
-                    println("Edge ${index + 1}:")
-                    println(edge.toString())
-                    println()
-                }
-
-                // Print graph statistics by type
-                println("=== Node Statistics ===")
-                val nodesByType = graph.nodes.values.groupBy { it.type }
-                nodesByType.forEach { (type, nodes) ->
-                    println("$type: ${nodes.size} nodes")
-                }
-                println()
-
-                // Print edge statistics by type
-                println("=== Edge Statistics ===")
-                val edgesByType = graph.edges.values.groupBy { it.type }
-                edgesByType.forEach { (type, edges) ->
-                    println("$type: ${edges.size} edges")
-                }
-                println()
-
-                // Print top 10 nodes by degree
-                println("=== Top 10 Nodes by Degree ===")
-                graph.getTopNDegreeNodes(10).forEachIndexed { index, node ->
-                    println("${index + 1}. ${node.name} (${node.type}) - Degree: ${node.getDegree()}")
-                }
             }
         } else {
             println("Semantic graph loaded from disk")
