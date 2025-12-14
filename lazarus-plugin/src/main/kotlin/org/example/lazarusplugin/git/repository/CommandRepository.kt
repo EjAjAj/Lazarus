@@ -1,11 +1,14 @@
+import com.intellij.openapi.components.Service
 import com.intellij.openapi.diagnostic.Logger
+import com.intellij.openapi.project.Project
 import org.example.lazarusplugin.git.service.ICommandRepository
 import org.example.lazarusplugin.git.models.CommandResult
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-
-class CommandRepository(private val repoPath: String) : ICommandRepository {
+@Service(Service.Level.PROJECT)
+class CommandRepository(private val project: Project) : ICommandRepository {
+    private val repoPath: String get() = project.basePath ?: throw IllegalStateException("Project base path not found")
     private val log = Logger.getInstance(CommandRepository::class.java)
 
     override fun executeCommand(args: List<String>): CommandResult {

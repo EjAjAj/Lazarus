@@ -15,4 +15,5 @@ interface GraphAnalysis {
      */
     suspend fun analyzeCluster(filePaths: List<String>): String
 
+    suspend fun  analyzeRemoteDiff(): String
 }

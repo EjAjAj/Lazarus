@@ -4,6 +4,7 @@ import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project
 import org.example.lazarusplugin.models.*
 import org.example.lazarusplugin.models.graph.Edge
+import org.example.lazarusplugin.services.api.FileReport
 import org.example.lazarusplugin.services.api.GraphReader
 import org.example.lazarusplugin.services.api.GraphStorage
 import org.intellij.markdown.lexer.push

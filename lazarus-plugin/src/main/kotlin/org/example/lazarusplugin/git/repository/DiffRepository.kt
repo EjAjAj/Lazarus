@@ -1,13 +1,16 @@
 package org.example.lazarusplugin.git.repository
 
 import CommandRepository
+import com.intellij.openapi.components.Service
+import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.Logger
+import com.intellij.openapi.project.Project
 import org.example.lazarusplugin.git.service.IDiffRepository
 import org.example.lazarusplugin.git.models.FileChange
 
-class DiffRepository(
-    private val commandRepo: CommandRepository
-) : IDiffRepository {
+@Service(Service.Level.PROJECT)
+class DiffRepository(private val project: Project) : IDiffRepository {
+    private val commandRepo = project.service<CommandRepository>()
     private val log = Logger.getInstance(DiffRepository::class.java)
 
     override fun getDiff(fromRef: String, toRef: String, filePath: String?): String {

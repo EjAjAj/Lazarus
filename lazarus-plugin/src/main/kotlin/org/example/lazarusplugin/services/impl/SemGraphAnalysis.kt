@@ -28,4 +28,7 @@ class SemGraphAnalysis(
         // Dummy implementation
         "Cluster analysis response (dummy)"
     }
+    override suspend fun analyzeRemoteDiff(): String{
+        return ""
+    }
 }

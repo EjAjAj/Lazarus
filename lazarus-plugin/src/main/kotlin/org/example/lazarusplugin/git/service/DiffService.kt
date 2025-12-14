@@ -1,21 +1,18 @@
 package org.example.lazarusplugin.git.service
 
 import CommandRepository
+import com.intellij.openapi.components.Service
+import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.Logger
+import com.intellij.openapi.project.Project
 import org.example.lazarusplugin.git.domain.IDiffService
 import org.example.lazarusplugin.git.models.FileChange
 import org.example.lazarusplugin.git.repository.DiffRepository
 
-
-class RobustGitDiffService private constructor(
-    private val commandRepo: CommandRepository,
-    private val diffRepo: IDiffRepository
-) : IDiffService {
-
-    constructor(repoPath: String) : this(
-        CommandRepository(repoPath),
-        DiffRepository(CommandRepository(repoPath))
-    )
+@Service(Service.Level.PROJECT)
+class RobustGitDiffService(private val project: Project) : IDiffService {
+    private val commandRepo = project.service<CommandRepository>()
+    private val diffRepo = project.service<DiffRepository>()
 
     private val log = Logger.getInstance(RobustGitDiffService::class.java)
 

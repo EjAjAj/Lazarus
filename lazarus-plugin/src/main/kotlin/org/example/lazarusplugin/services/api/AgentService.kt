@@ -5,6 +5,12 @@ import com.intellij.openapi.vfs.VirtualFile
 /**
  * Interface for communicating with external LLM agent
  */
+data class AgentFileInput(
+    val fileContent: String,
+    val fileDiff: String,
+    val fileReport: FileReport
+)
+
 interface AgentService {
 
     /**
@@ -15,5 +21,6 @@ interface AgentService {
     /**
      * Check if agent is available
      */
+    fun generateReport(inputs: List<AgentFileInput>): String
     fun isAvailable(): Boolean
 }

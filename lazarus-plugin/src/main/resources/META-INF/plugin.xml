@@ -27,6 +27,8 @@
         <postStartupActivity implementation="org.example.lazarusplugin.Main"/>
 
         <!-- Service registrations -->
+        <applicationService serviceImplementation="org.example.lazarusplugin.utils.HttpClient"/>
+
         <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphStorage"
                         serviceImplementation="org.example.lazarusplugin.services.impl.SemGraphStorage"/>
         <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphBuilder"
@@ -37,6 +39,14 @@
                         serviceImplementation="org.example.lazarusplugin.services.impl.LLMAgentService"/>
         <projectService serviceInterface="org.example.lazarusplugin.services.api.GraphAnalysis"
                         serviceImplementation="org.example.lazarusplugin.services.impl.SemGraphAnalysis"/>
+
+        <!-- Git services -->
+        <projectService serviceInterface="org.example.lazarusplugin.git.service.ICommandRepository"
+                        serviceImplementation="CommandRepository"/>
+        <projectService serviceInterface="org.example.lazarusplugin.git.service.IDiffRepository"
+                        serviceImplementation="org.example.lazarusplugin.git.repository.DiffRepository"/>
+        <projectService serviceInterface="org.example.lazarusplugin.git.service.IDiffService"
+                        serviceImplementation="org.example.lazarusplugin.git.service.RobustGitDiffService"/>
     </extensions>
 
     <actions>
