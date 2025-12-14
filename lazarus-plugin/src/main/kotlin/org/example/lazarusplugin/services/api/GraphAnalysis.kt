@@ -8,7 +8,7 @@ interface GraphAnalysis {
     /**
      * Analyze a cluster of files
      */
-    suspend fun analyzeCluster(filePaths: List<String>): String
+    suspend fun analyzeFile(filePath: String): String
 
     suspend fun  analyzeRemoteDiff(): String
 }
