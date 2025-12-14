@@ -44,7 +44,7 @@ class SemGraphAnalysis(
 
     override suspend fun makeInitProjectReport(): String = withContext(Dispatchers.IO) {
         if (projectReport.isEmpty()) {
-            val hotFiles = graphReader.getHotFiles().take(4)
+            val hotFiles = graphReader.getHotFiles().take(5)
             // Generate file reports for all hot files
             val agentFileInputs = hotFiles.map { filePath ->
                 val fileReport = graphReader.getFileFacts(filePath, ArrayList(hotFiles))

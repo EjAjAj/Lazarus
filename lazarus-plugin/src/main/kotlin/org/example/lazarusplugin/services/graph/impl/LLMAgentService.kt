@@ -78,7 +78,6 @@ class LLMAgentService(private val project: Project) : AgentService {
         }
         val requestBody = DiffReq(md_list = files, general = FileData(name="projectReport.md", content = generalReport))
         val jsonBody = json.encodeToString(requestBody)
-        println(jsonBody)
         val responseJson = httpClient.post("/incremental", jsonBody)
         val apiResponse = json.decodeFromString<ApiResponse>(responseJson)
         return apiResponse.data ?: ""
