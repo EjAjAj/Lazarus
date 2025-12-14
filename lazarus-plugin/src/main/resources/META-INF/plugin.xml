@@ -47,7 +47,7 @@
         <projectService serviceInterface="org.example.lazarusplugin.repository.api.IDiffRepository"
                         serviceImplementation="org.example.lazarusplugin.repository.impl.DiffRepository"/>
         <projectService serviceInterface="org.example.lazarusplugin.services.git.api.IDiffService"
-                        serviceImplementation="org.example.lazarusplugin.services.git.impl.RobustGitDiffService"/>
+                        serviceImplementation="org.example.lazarusplugin.services.git.impl.DiffService"/>
     </extensions>
 
     <actions>

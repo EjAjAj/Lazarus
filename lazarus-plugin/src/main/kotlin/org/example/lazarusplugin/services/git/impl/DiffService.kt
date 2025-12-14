@@ -1,22 +1,25 @@
-package org.example.lazarusplugin.git.service.impl
+package org.example.lazarusplugin.services.git.impl
 
 import com.intellij.openapi.components.Service
 import com.intellij.openapi.components.service
 import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.example.lazarusplugin.models.git.FileChange
 import org.example.lazarusplugin.repository.impl.CommandRepository
 import org.example.lazarusplugin.repository.impl.DiffRepository
 import org.example.lazarusplugin.services.git.api.IDiffService
 
 @Service(Service.Level.PROJECT)
-class RobustGitDiffService(private val project: Project) : IDiffService {
-    private val commandRepo = project.service<CommandRepository>()
-    private val diffRepo = project.service<DiffRepository>()
+class DiffService(private val project: Project) : IDiffService {
+    private val commandRepo by lazy { project.service<CommandRepository>() }
+    private val diffRepo by lazy { project.service<DiffRepository>() }
 
-    private val log = Logger.getInstance(RobustGitDiffService::class.java)
+    private val log = Logger.getInstance(DiffService::class.java)
 
-    override fun getChangedFiles(): List<FileChange> {
+    override fun getChangedFiles(): List<FileChange> = runBlocking(Dispatchers.IO) {
         log.info("Starting robust Git diff analysis")
 
         val strategies = listOf(
@@ -34,7 +37,7 @@ class RobustGitDiffService(private val project: Project) : IDiffService {
 
                 if (result.isNotEmpty()) {
                     log.info("Strategy ${index + 1} succeeded with ${result.size} files")
-                    return result
+                    return@runBlocking result
                 }
             } catch (e: Exception) {
                 log.warn("Strategy ${index + 1} failed: ${e.message}", e)
@@ -42,15 +45,15 @@ class RobustGitDiffService(private val project: Project) : IDiffService {
         }
 
         log.info("No changes detected")
-        return emptyList()
+        emptyList()
     }
 
-    override fun getChangedFilesWithDiffs(): Map<String, String> {
+    override fun getChangedFilesWithDiffs(): Map<String, String> = runBlocking(Dispatchers.IO) {
         val changedFiles = getChangedFiles()
 
         if (changedFiles.isEmpty()) {
             log.info("No changed files to diff")
-            return emptyMap()
+            return@runBlocking emptyMap()
         }
 
         val currentBranch = commandRepo.getCurrentBranch()
@@ -68,7 +71,7 @@ class RobustGitDiffService(private val project: Project) : IDiffService {
             }
         }
 
-        return diffs
+        return@runBlocking diffs
     }
 
     private fun tryOriginVsHead(): List<FileChange> {
