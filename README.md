@@ -16,7 +16,7 @@ Lazarus is an IntelliJ IDEA plugin that builds and maintains a semantic graph of
   - Method call relationships
   - Field access patterns
   - Class inheritance structures
-<img src="https://github.com/EjAjAj/Lazarus/blob/main/assets/SemanticCodeGraph.png" alt="Semantic Code Graph" width="600" />
+<img src="https://github.com/EjAjAj/Lazarus/blob/main/assets/SemanticCodeGraph.png" alt="Semantic Code Graph"/>
 
 - **Intelligent Reporting**: Three types of semantic reports:
   - **File Semantic Report** (`Ctrl+Alt+S`): Analyze a single file and its connections
