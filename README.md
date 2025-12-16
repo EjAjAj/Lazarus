@@ -1,5 +1,5 @@
 # Lazarus
-
+![https://github.com/EjAjAj/Lazarus/assets/Lazarus.png]()
 A semantic code analysis and reporting plugin for IntelliJ IDEA that generates intelligent insights about your Java/Kotlin codebase using graph-based analysis and LLM-powered semantic understanding.
 
 ## Overview
