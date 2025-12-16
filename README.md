@@ -1,6 +1,9 @@
 # Lazarus
-![https://github.com/EjAjAj/Lazarus/assets/Lazarus.png]()
+![Lazarus](https://github.com/EjAjAj/Lazarus/blob/main/assets/Lazarus.png)
+
 A semantic code analysis and reporting plugin for IntelliJ IDEA that generates intelligent insights about your Java/Kotlin codebase using graph-based analysis and LLM-powered semantic understanding.
+
+**Goal: optimize token consumption**
 
 ## Overview
 
@@ -14,6 +17,8 @@ Lazarus is an IntelliJ IDEA plugin that builds and maintains a semantic graph of
   - Field access patterns
   - Class inheritance structures
 
+![SemanticCodeGraph](https://github.com/EjAjAj/Lazarus/blob/main/assets/SemanticCodeGraph.png)
+
 - **Intelligent Reporting**: Three types of semantic reports:
   - **File Semantic Report** (`Ctrl+Alt+S`): Analyze a single file and its connections
   - **Global Semantic Report** (`Ctrl+Alt+Shift+S`): Generate a project-wide semantic analysis
@@ -24,7 +29,7 @@ Lazarus is an IntelliJ IDEA plugin that builds and maintains a semantic graph of
 - **LLM-Powered Analysis**: Integrates with external LLM services to generate human-readable insights about code structure and changes
 
 ## Architecture
-
+![ArchitectureDiagram](https://github.com/EjAjAj/Lazarus/blob/main/assets/ArchitectureDiagram.png)
 ### Core Components
 
 1. **Graph Building** (`PsiGraphBuilder`)
@@ -180,11 +185,11 @@ Contributions are welcome! Please ensure:
 
 ## License
 
-[Add license information]
+MIT Licencse 
 
 ## Authors
 
-YourCompany
+EjAj
 
 ---
 
